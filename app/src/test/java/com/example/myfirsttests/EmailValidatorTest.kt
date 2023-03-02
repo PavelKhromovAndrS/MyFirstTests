@@ -7,7 +7,7 @@ import org.junit.Test
 class EmailValidatorTest {
     @Test
     fun emailValidator_CorrectEmailSimple_ReturnsTrue() {
-        assertTrue(EmailValidator.isValidEmail("nameemail.com"))
+        assertTrue(EmailValidator.isValidEmail("name@email.com"))
     }
     @Test
     fun emailValidator_CorrectEmailSubDomain_ReturnsTrue() {
@@ -32,5 +32,17 @@ class EmailValidatorTest {
     @Test
     fun emailValidator_NullEmail_ReturnsFalse() {
         assertFalse(EmailValidator.isValidEmail(null))
+    }
+    @Test
+    fun emailValidator_InvalidEmailNoDomain_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("name@.com"))
+    }
+    @Test
+    fun emailValidator_InvalidEmailUsernameWithSpace_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("name 1@gmail.com"))
+    }
+    @Test
+    fun emailValidator_InvalidEmailEmailWithoutAt_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("namegmail.com"))
     }
 }
